@@ -1,0 +1,21 @@
+speech-to-text mixes with text-to-speech in google - search :
+-Speech recognition
+-ASR (automatic speech recognition)
+-computer speech recognition
+Natural language processing - subfield of computer science. Major tasks contains speech recognition
+Audio files from https://commonvoice.mozilla.org/sk (no copyright)
+
+
+History:
+1952 – Three Bell Labs researchers, Stephen Balashek,[9] R. Biddulph, and K. H. Davis built a system called "Audrey"[10] for single-speaker digit recognition. Their system located the formants in the power spectrum of each utterance.[11]
+1960 – Gunnar Fant developed and published the source-filter model of speech production.
+1962 – IBM demonstrated its 16-word "Shoebox" machine's speech recognition capability at the 1962 World's Fair.[12]
+1966 – Linear predictive coding (LPC), a speech coding method, was first proposed by Fumitada Itakura of Nagoya University and Shuzo Saito of Nippon Telegraph and Telephone (NTT), while working on speech recognition.[13]
+1969 – Funding at Bell Labs dried up for several years when, in 1969, the influential John Pierce wrote an open letter that was critical of and defunded speech recognition research.[14] This defunding lasted until Pierce retired and James L. Flanagan took over.
+1971 – DARPA funded five years for Speech Understanding Research, speech recognition research seeking a minimum vocabulary size of 1,000 words. They thought speech understanding would be key to making progress in speech recognition, but this later proved untrue.[16] BBN, IBM, Carnegie Mellon and Stanford Research Institute all participated in the program.[17][18] This revived speech recognition research post John Pierce's letter.
+1972 – The IEEE Acoustics, Speech, and Signal Processing group held a conference in Newton, Massachusetts.
+1976 – The first ICASSP was held in Philadelphia, which since then has been a major venue for the publication of research on speech recognition.[19]
+1987 – The back-off model allowed language models to use multiple length n-grams, and CSELT[27] used HMM to recognize languages (both in software and in hardware specialized processors, e.g. RIPAC).
+1984 – was released the Apricot Portable with up to 4096 words support, of which only 64 could be held in RAM at a time.[30]
+1987 – a recognizer from Kurzweil Applied Intelligence
+1990 – Dragon Dictate, a consumer product released in 1990[31][32] AT&T deployed the Voice Recognition Call Processing service in 1992 to route telephone calls without the use of a human operator.[33] The technology was developed by Lawrence Rabiner and others at Bell Labs.
