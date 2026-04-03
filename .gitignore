@@ -1,5 +1,11 @@
 ~*
 *.wav
+data/
 *pycache*
 *.pdf
 venv
+.env
+logs/
+.hf-cache/
+vosk_tmp/
+speech_recognition/
