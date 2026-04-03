@@ -121,6 +121,9 @@ def transcript(wav_path: str, model: Model) -> str:
 		spec = SPECS[model]
 		loaded = _get_loaded_model(spec)
 		return spec.transcriber(loaded, wav_path).strip()
+	except KeyboardInterrupt:
+		print("Transcription interrupted by user.")
+		return None
 	except Exception as e:
 		print(f"Transcription failed: \n{e}")
 		return None

@@ -1,10 +1,10 @@
 setup venv:
 
-python3 -m venv venv
+python3 -m venv .venv
 
-Activate venv:
+Activate venv ( from project root ):
 
-source venv/bin/activate
+source .venv/bin/activate
 
 Update pip:
 
