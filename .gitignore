@@ -6,6 +6,7 @@ data/
 venv
 .env
 logs/
+output/
 .hf-cache/
 vosk_tmp/
 speech_recognition/

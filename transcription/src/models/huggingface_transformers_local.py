@@ -19,7 +19,7 @@ def load_huggingface_asr(model_id: str):
 
 
 def transcribe_huggingface_asr(pipe, wav_path: str) -> str:
-    result = pipe(wav_path)
+    result = pipe(wav_path, generate_kwargs={"language": "czech"})
     if isinstance(result, dict):
         return str(result.get("text", ""))
     return str(result)

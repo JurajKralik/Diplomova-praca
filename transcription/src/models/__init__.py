@@ -92,8 +92,8 @@ SPECS: Final[Dict[Model, ModelSpec]] = {
 	),
 	Model.FASTER_WHISPER_LARGE: ModelSpec(
 		model=Model.FASTER_WHISPER_LARGE,
-		label="Faster-Whisper large int8 cpu (local)",
-		loader=lambda: load_faster_whisper("large-v2", device="cpu", compute_type="int8"),
+		label="Faster-Whisper large float16 cuda (local)",
+		loader=lambda: load_faster_whisper("large-v2", device="cuda", compute_type="float16"),
 		transcriber=transcribe_faster_whisper,
 	),
 
@@ -153,8 +153,8 @@ SPECS: Final[Dict[Model, ModelSpec]] = {
 	),
 	Model.SPEECH_RECOGNITION_FASTER_WHISPER_SMALL: ModelSpec(
 		model=Model.SPEECH_RECOGNITION_FASTER_WHISPER_SMALL,
-		label="SpeechRecognition Faster-Whisper small int8 cpu (local)",
-		loader=lambda: load_speech_recognition_faster_whisper("small", device="cpu", compute_type="int8"),
+		label="SpeechRecognition Faster-Whisper small float16 cuda (local)",
+		loader=lambda: load_speech_recognition_faster_whisper("small", device="cuda", compute_type="float16"),
 		transcriber=transcribe_speech_recognition_faster_whisper,
 	),
 	Model.HUGGINGFACE_WAV2VEC2_XLSR_53_CZECH: ModelSpec(

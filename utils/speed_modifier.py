@@ -1,30 +1,40 @@
-from pydub import AudioSegment
+from pathlib import Path
 from tkinter import filedialog
-import os
 
-def modify_speed(input_folder: str, output_folder: str, speed: float = 0.5):
-	# Loop through all WAV files
-	for filename in os.listdir(input_folder):
-		if filename.endswith('.wav'):
-			original_path = os.path.join(input_folder, filename)
-			modified_path = os.path.join(output_folder, filename)
+from pydub import AudioSegment
 
-			sound = AudioSegment.from_wav(original_path)
 
-			# Modify speed
-			modified_sound = sound._spawn(sound.raw_data, overrides={
-				"frame_rate": int(sound.frame_rate * speed)
-			}).set_frame_rate(sound.frame_rate)  # Keep original frame rate to save as valid WAV
+def modify_speed(input_folder: Path, output_folder: Path, speed: float = 0.9) -> None:
+    output_folder.mkdir(parents=True, exist_ok=True)
 
-			modified_sound.export(modified_path, format="wav")
-			print(f"Saved modified file: {modified_path}")
+    for file_path in sorted(input_folder.iterdir()):
+        if file_path.suffix.lower() != '.wav':
+            continue
 
-input_path = filedialog.askdirectory()
-if not input_path:
-    print("No input directory selected.")
-    exit()
-output_path = filedialog.askdirectory()
-if not output_path:
-    print("No output directory selected.")
-    exit()
-modify_speed(input_path, output_path, speed=0.9)
+        modified_path = output_folder / file_path.name
+        sound = AudioSegment.from_wav(file_path)
+        modified_sound = sound._spawn(
+            sound.raw_data,
+            overrides={"frame_rate": int(sound.frame_rate * speed)},
+        ).set_frame_rate(sound.frame_rate)
+
+        modified_sound.export(modified_path, format='wav')
+        print(f"Saved modified file: {modified_path}")
+
+
+def main() -> None:
+    input_path = filedialog.askdirectory(title='Select input folder with WAV files')
+    if not input_path:
+        print('No input directory selected.')
+        return
+
+    output_path = filedialog.askdirectory(title='Select output folder for speed-modified WAV files')
+    if not output_path:
+        print('No output directory selected.')
+        return
+
+    modify_speed(Path(input_path), Path(output_path), speed=0.9)
+
+
+if __name__ == '__main__':
+    main()
