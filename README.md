@@ -17,3 +17,11 @@ pip install -r requirements.txt
 Development dependencies:
 
 pip freeze > requirements.txt
+
+See available models:
+
+python transcription/main.py --help
+
+Run transcription with selected model:
+
+python transcription/main.py --model speech_recognition_faster_whisper_small
