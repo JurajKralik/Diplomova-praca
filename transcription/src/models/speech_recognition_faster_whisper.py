@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+import torch
 import speech_recognition as sr
 
 
-def load_speech_recognition_faster_whisper(model_size: str, device: str = "cpu", compute_type: str = "int8"):
+def load_speech_recognition_faster_whisper(model_size: str, device: str = "cuda", compute_type: str = "float16"):
+    if not torch.cuda.is_available():
+        device = "cpu"
+        if compute_type == "float16":
+            compute_type = "int8"
     return (sr.Recognizer(), model_size, device, compute_type)
 
 
