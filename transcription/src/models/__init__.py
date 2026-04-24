@@ -24,8 +24,8 @@ class Model(Enum):
 	WHISPER_SMALL = "whisper_small"
 	WHISPER_MEDIUM = "whisper_medium"
 	WHISPER_LARGE = "whisper_large"
-	FASTER_WHISPER_MEDIUM = "faster_whisper_medium_int8_cpu"
-	FASTER_WHISPER_LARGE = "faster_whisper_large_int8_cpu"
+	FASTER_WHISPER_MEDIUM = "faster_whisper_medium_float16_cuda"
+	FASTER_WHISPER_LARGE = "faster_whisper_large_float16_cuda"
 	SPEECH_RECOGNITION_GOOGLE = "speech_recognition_google"
 	SPEECH_RECOGNITION_SPHINX = "speech_recognition_sphinx"
 	SPEECH_RECOGNITION_WITAI = "speech_recognition_witai"
@@ -86,8 +86,8 @@ SPECS: Final[Dict[Model, ModelSpec]] = {
 
 	Model.FASTER_WHISPER_MEDIUM: ModelSpec(
 		model=Model.FASTER_WHISPER_MEDIUM,
-		label="Faster-Whisper medium int8 cpu (local)",
-		loader=lambda: load_faster_whisper("medium", device="cpu", compute_type="int8"),
+		label="Faster-Whisper medium float16 cuda (local)",
+		loader=lambda: load_faster_whisper("medium", device="cuda", compute_type="float16"),
 		transcriber=transcribe_faster_whisper,
 	),
 	Model.FASTER_WHISPER_LARGE: ModelSpec(
