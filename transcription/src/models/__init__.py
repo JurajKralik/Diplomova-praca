@@ -12,8 +12,6 @@ from .speech_recognition_witai import load_speech_recognition_witai, transcribe_
 from .speech_recognition_openai import load_speech_recognition_openai, transcribe_speech_recognition_openai
 from .speech_recognition_groq import load_speech_recognition_groq, transcribe_speech_recognition_groq
 from .speech_recognition_vosk import load_speech_recognition_vosk, transcribe_speech_recognition_vosk
-from .speech_recognition_whisper import load_speech_recognition_whisper, transcribe_speech_recognition_whisper
-from .speech_recognition_faster_whisper import load_speech_recognition_faster_whisper, transcribe_speech_recognition_faster_whisper
 from .huggingface_transformers_local import load_huggingface_asr, transcribe_huggingface_asr
 from .huggingface_transformers_seq2seq_local import load_huggingface_seq2seq_asr, transcribe_huggingface_seq2seq_asr
 
@@ -32,10 +30,6 @@ class Model(Enum):
 	SPEECH_RECOGNITION_OPENAI = "speech_recognition_openai"
 	SPEECH_RECOGNITION_GROQ = "speech_recognition_groq"
 	SPEECH_RECOGNITION_VOSK = "speech_recognition_vosk"
-	SPEECH_RECOGNITION_WHISPER_BASE = "speech_recognition_whisper_base"
-	SPEECH_RECOGNITION_WHISPER_SMALL = "speech_recognition_whisper_small"
-	SPEECH_RECOGNITION_FASTER_WHISPER_BASE = "speech_recognition_faster_whisper_base"
-	SPEECH_RECOGNITION_FASTER_WHISPER_SMALL = "speech_recognition_faster_whisper_small"
 	HUGGINGFACE_WAV2VEC2_XLSR_53_CZECH = "huggingface_wav2vec2_xlsr_53_czech"
 	HUGGINGFACE_WAV2VEC2_XLSR_CZECH = "huggingface_wav2vec2_xlsr_czech"
 	HUGGINGFACE_WAV2VEC2_XLSR_CZECH_SAMMY = "huggingface_wav2vec2_xlsr_czech_sammy"
@@ -132,30 +126,6 @@ SPECS: Final[Dict[Model, ModelSpec]] = {
 		label="Vosk Speech Recognition (offline)",
 		loader=load_speech_recognition_vosk,
 		transcriber=transcribe_speech_recognition_vosk,
-	),
-	Model.SPEECH_RECOGNITION_WHISPER_BASE: ModelSpec(
-		model=Model.SPEECH_RECOGNITION_WHISPER_BASE,
-		label="SpeechRecognition Whisper base (local)",
-		loader=lambda: load_speech_recognition_whisper("base"),
-		transcriber=transcribe_speech_recognition_whisper,
-	),
-	Model.SPEECH_RECOGNITION_WHISPER_SMALL: ModelSpec(
-		model=Model.SPEECH_RECOGNITION_WHISPER_SMALL,
-		label="SpeechRecognition Whisper small (local)",
-		loader=lambda: load_speech_recognition_whisper("small"),
-		transcriber=transcribe_speech_recognition_whisper,
-	),
-	Model.SPEECH_RECOGNITION_FASTER_WHISPER_BASE: ModelSpec(
-		model=Model.SPEECH_RECOGNITION_FASTER_WHISPER_BASE,
-		label="SpeechRecognition Faster-Whisper base int8 cpu (local)",
-		loader=lambda: load_speech_recognition_faster_whisper("base", device="cpu", compute_type="int8"),
-		transcriber=transcribe_speech_recognition_faster_whisper,
-	),
-	Model.SPEECH_RECOGNITION_FASTER_WHISPER_SMALL: ModelSpec(
-		model=Model.SPEECH_RECOGNITION_FASTER_WHISPER_SMALL,
-		label="SpeechRecognition Faster-Whisper small float16 cuda (local)",
-		loader=lambda: load_speech_recognition_faster_whisper("small", device="cuda", compute_type="float16"),
-		transcriber=transcribe_speech_recognition_faster_whisper,
 	),
 	Model.HUGGINGFACE_WAV2VEC2_XLSR_53_CZECH: ModelSpec(
 		model=Model.HUGGINGFACE_WAV2VEC2_XLSR_53_CZECH,
