@@ -119,7 +119,6 @@ def main() -> None:
             "audio_duration_seconds": get_audio_duration_seconds(file_path),
             "transcript_duration_seconds": None,
             "text": None,
-            "error": None,
         }
 
         try:
@@ -131,7 +130,6 @@ def main() -> None:
         except Exception as e:
             transcript_duration = time.perf_counter() - started_perf
             item["transcript_duration_seconds"] = round(transcript_duration, 3)
-            item["error"] = str(e)
             print(f"({index}/{total}) Failed: {file_path.name} -> {e}")
 
         results.append(item)
