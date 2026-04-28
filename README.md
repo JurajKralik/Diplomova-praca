@@ -35,7 +35,7 @@ python transcription/main.py --model speech_recognition_faster_whisper_small
 - huggingface_wav2vec2_xlsr_53_czech: 🟢 3 tests
 - huggingface_wav2vec2_xlsr_czech: 🟢 3 tests
 - huggingface_wav2vec2_xlsr_czech_sammy: 🟢 3 tests
-- huggingface_whisper_large_v3_czech: 🟢 TODO
+- huggingface_whisper_large_v3_czech: 🟢 3 tests
 - huggingface_whisper_medium_czech: 🟡 slow
 
 ### Direct Whisper Implementations
