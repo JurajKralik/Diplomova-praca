@@ -27,7 +27,7 @@ Run transcription with selected model:
 python transcription/main.py --model speech_recognition_faster_whisper_small
 
 ### Faster Whisper Implementations
-- faster_whisper_large_float16_cuda: 🟡 slow
+- faster_whisper_large_float16_cuda: 🟢 3 tests
 - faster_whisper_medium_float16_cuda: 🟢 3 tests
 
 ### HuggingFace (Wav2Vec2/Whisper fine-tuned models)
@@ -36,7 +36,7 @@ python transcription/main.py --model speech_recognition_faster_whisper_small
 - huggingface_wav2vec2_xlsr_czech: 🟢 3 tests
 - huggingface_wav2vec2_xlsr_czech_sammy: 🟢 3 tests
 - huggingface_whisper_large_v3_czech: 🟢 3 tests
-- huggingface_whisper_medium_czech: 🟡 slow
+- huggingface_whisper_medium_czech: 🟡 2 tests slow
 
 ### Direct Whisper Implementations
 - whisper_large: 🟡 3 tests (3 000/15 000) slow
@@ -48,7 +48,7 @@ python transcription/main.py --model speech_recognition_faster_whisper_small
 ### Speech Recognition Wrappers/APIs
 - speech_recognition_google: 🟢 3 tests
 - speech_recognition_openai: 🔴  "You exceeded your current quota, please check your plan and billing details."
-- speech_recognition_groq: 🟡 very slow
+- speech_recognition_groq: 🟡 3 tests very slow
 - speech_recognition_sphinx: 🔴 EN only
 - speech_recognition_vosk: 🟢 TODO
 - speech_recognition_witai: 🔴 CZ experimental and not workign
