@@ -104,8 +104,8 @@ def validate_json(source_json: Path, references: dict, validated_dir: Path) -> N
         validated_items.append(item_result)
 
     payload = {
-        "source_json": str(source_json),
-        "validated_tsv": str(VALIDATED_TSV),
+        "source_json": str(source_json.relative_to(PROJECT_ROOT)),
+        "validated_tsv": str(VALIDATED_TSV.relative_to(PROJECT_ROOT)),
         "model": source_payload.get("model"),
         "created_at": datetime.now().isoformat(),
         "total_items": len(source_items),
@@ -125,6 +125,43 @@ def validate_json(source_json: Path, references: dict, validated_dir: Path) -> N
     print(f"Average transcript ratio: {payload['average_transcript_ratio']}")
 
 
+def build_summary(validated_dir: Path) -> None:
+    model_runs: dict[str, list[dict]] = {}
+
+    for validated_json in sorted(validated_dir.glob("*_validated.json")):
+        payload = json.loads(validated_json.read_text(encoding="utf-8"))
+        model = payload.get("model")
+        if not model:
+            continue
+        model_runs.setdefault(model, []).append({
+            "source_json": payload.get("source_json"),
+            "created_at": payload.get("created_at"),
+            "total_items": payload.get("total_items"),
+            "matched_items": payload.get("matched_items"),
+            "average_wer": payload.get("average_wer"),
+            "average_cer": payload.get("average_cer"),
+            "elapsed_seconds": payload.get("elapsed_seconds"),
+            "average_transcript_ratio": payload.get("average_transcript_ratio"),
+        })
+
+    summary: list[dict] = []
+    for model, runs in sorted(model_runs.items()):
+        wer_vals = [r["average_wer"] for r in runs if r["average_wer"] is not None]
+        cer_vals = [r["average_cer"] for r in runs if r["average_cer"] is not None]
+        ratio_vals = [r["average_transcript_ratio"] for r in runs if r["average_transcript_ratio"] is not None]
+        summary.append({
+            "model": model,
+            "test_run_count": len(runs),
+            "average_wer": (sum(wer_vals) / len(wer_vals)) if wer_vals else None,
+            "average_cer": (sum(cer_vals) / len(cer_vals)) if cer_vals else None,
+            "average_transcript_ratio": (sum(ratio_vals) / len(ratio_vals)) if ratio_vals else None,
+        })
+
+    summary_path = validated_dir / "summary.json"
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Summary saved: {summary_path} ({len(summary)} models)")
+
+
 def main() -> None:
     if not VALIDATED_TSV.exists():
         print(f"Missing validated TSV: {VALIDATED_TSV}")
@@ -142,6 +179,8 @@ def main() -> None:
 
     for source_json in source_jsons:
         validate_json(source_json, references, validated_dir)
+
+    build_summary(validated_dir)
 
 
 if __name__ == "__main__":
