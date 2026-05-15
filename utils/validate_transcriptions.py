@@ -3,12 +3,18 @@ from __future__ import annotations
 import csv
 import json
 import os
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
 from jiwer import cer, wer
+
+
+def _normalize(text: str) -> str:
+    """Lowercase and strip punctuation for fair WER/CER comparison."""
+    return ' '.join(re.sub(r'[^\w\s]', ' ', text.lower(), flags=re.UNICODE).split())
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -90,8 +96,10 @@ def validate_json(source_json: Path, references: dict, validated_dir: Path) -> N
         }
 
         if reference_text is not None and predicted_text is not None and item.get("error") is None:
-            item_result["wer"] = wer(reference_text, predicted_text)
-            item_result["cer"] = cer(reference_text, predicted_text)
+            ref_norm = _normalize(reference_text)
+            hyp_norm = _normalize(predicted_text)
+            item_result["wer"] = wer(ref_norm, hyp_norm)
+            item_result["cer"] = cer(ref_norm, hyp_norm)
             wer_values.append(item_result["wer"])
             cer_values.append(item_result["cer"])
             matched_count += 1
