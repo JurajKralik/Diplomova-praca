@@ -11,3 +11,4 @@ output/
 vosk_tmp/
 speech_recognition/
 *.docx#
+*.odt#
